@@ -18,7 +18,7 @@ app.post("/", (req, res) => {
     let parsedBody = JSON.parse(body);
 
     /*
-      If you decide to reject the message, the endpoint must return the same message structure but with the message type set to error (the HTTP response code should still be 200).
+      If you decide to reject the message, the endpoint must return the same message structure but with the message type set to error (the HTTP response code should still be 200).    
       If the message type is set to error, it won’t be returned to clients but will still be saved into the Stream's database.
      */
     if (parsedBody.message.text.trim() === "foobar") {
@@ -26,8 +26,7 @@ app.post("/", (req, res) => {
       parsedBody.message.type = "error";
       parsedBody.message.my_custom_field = true;
     }
-
-    //You have to send the whole deal.
+    //You must return the whole body
     res.status(200).send(parsedBody);
   });
 });
